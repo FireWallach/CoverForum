@@ -1,4 +1,5 @@
-// app/routes.js
+var Board = require('../app/models/board');
+
 module.exports = function(app, passport) {
 
     // =====================================
@@ -37,13 +38,49 @@ module.exports = function(app, passport) {
     // =====================================
     // COVER SECTION =====================
     // =====================================
-    // we will want this protected so you have to be logged in to visit
-    // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/cover', isLoggedIn, function(req, res) {
         res.render('cover.ejs', {
             user : req.user // get the user out of session and pass to template
         });
     });
+
+    // =====================================
+    // BOARD SECTION =====================
+    // =====================================
+    app.get('/b', isLoggedIn, function(req, res){
+        res.render('newBoard.ejs', {
+            user: req.user,
+            message : req.flash('boardCreateMessage')
+        })
+    });
+    app.post('/b', isLoggedIn, function(req,res){
+        Board.findOne({ 'name' :  req.body.name }, function(err, board) {
+            if(err){
+                res.render('newBoard.ejs', {
+                    board: req.board,
+                    message : 'Error Looking Up Board.'
+                });
+            }
+            if(board){
+                res.render('newBoard.ejs', {
+                    board: req.board,
+                    message :'Board Already Exists.'
+                })
+            }
+            if(board == null){
+                var newBoard = new Board();
+                newBoard.name = req.body.name;
+                newBoard.description = req.body.description;
+                newBoard.save(function(err) {
+                    if (err)
+                        throw err;
+                });
+                res.render('cover.ejs', {
+                    user : req.user // get the user out of session and pass to template
+                });            }
+        })
+    });
+
 
     // =====================================
     // LOGOUT ==============================
