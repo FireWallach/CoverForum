@@ -99,11 +99,8 @@ module.exports = function(app, passport) {
         })
     });
     app.post('/b/:board', isLoggedIn, function(req, res){
-        Board.findOne({name : req.params.board}, function(err, board){
-            // if(board){
-            //     board.remove();
-            //     res.redirect('/cover');
-            // } 
+        Board.deleteOne({name : req.params.board}, function(err, board){
+            res.redirect('/cover');
         });
     });
 
