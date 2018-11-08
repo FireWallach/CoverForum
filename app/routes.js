@@ -18,9 +18,11 @@ module.exports = function(app, passport) {
         // render the page and pass in any flash data if it exists
         res.render('login.ejs', { message: req.flash('loginMessage') }); 
     });
-
-    // process the login form
-    // app.post('/login', do all our passport stuff here);
+    app.post('/login', passport.authenticate('local-login', {
+        successRedirect : '/cover', // redirect to the secure cover section
+        failureRedirect : '/login', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
+    }));
 
     // =====================================
     // SIGNUP ==============================
@@ -32,15 +34,32 @@ module.exports = function(app, passport) {
         res.render('signup.ejs', { message: req.flash('signupMessage') });
     });
 
-    // process the signup form
-    // app.post('/signup', do all our passport stuff here);
+    app.post('/signup', passport.authenticate('local-signup', {
+        successRedirect : '/cover', // redirect to the secure cover section
+        failureRedirect : '/signup', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
+    }));
 
     // =====================================
     // COVER SECTION =====================
     // =====================================
     app.get('/cover', isLoggedIn, function(req, res) {
-        res.render('cover.ejs', {
-            user : req.user // get the user out of session and pass to template
+
+        Board.find({}, function(err, boards){
+            if(boards){
+                res.render('cover.ejs', {
+                    boards:boards,
+                    user:req.user
+                });
+            }
+            if(err){
+                res.render('/',{
+                    message:'Error finding Boards',
+                    user:req.user,
+                    boards:[]
+                })
+            
+            }
         });
     });
 
@@ -75,10 +94,17 @@ module.exports = function(app, passport) {
                     if (err)
                         throw err;
                 });
-                res.render('cover.ejs', {
-                    user : req.user // get the user out of session and pass to template
-                });            }
+                res.redirect('/cover')
+           }
         })
+    });
+    app.post('/b/:board', isLoggedIn, function(req, res){
+        Board.findOne({name : req.params.board}, function(err, board){
+            // if(board){
+            //     board.remove();
+            //     res.redirect('/cover');
+            // } 
+        });
     });
 
 
@@ -89,19 +115,7 @@ module.exports = function(app, passport) {
         req.logout();
         res.redirect('/');
     });
-        // process the login form
-    app.post('/login', passport.authenticate('local-login', {
-        successRedirect : '/cover', // redirect to the secure cover section
-        failureRedirect : '/login', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
-    }));
-
-    // process the signup form
-    app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect : '/cover', // redirect to the secure cover section
-        failureRedirect : '/signup', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
-    }));
+        
 };
 
 // route middleware to make sure a user is logged in

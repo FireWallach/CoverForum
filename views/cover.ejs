@@ -33,6 +33,18 @@
       <main role="main" class="inner cover">
         <h1 class="cover-heading">It's a page</h1>
         <p class="lead">Dang this is a pretty good page right here</p>
+        <% for(var i=0; i<boards.length; i++) { %>
+          <div class="card">
+            <h5 class="card-header"><%= boards[i].name %></h5>
+            <div class="card-body">
+              <h5 class="card-title"><%= boards[i].description %></h5>
+              <form action="<%= '/b/'.concat(boards[i].name) %>" method="POST" class="form-signin">
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+            </div>
+          </div>
+          <br />
+        <% } %>
         <p class="lead">
           <a href="#" class="btn btn-lg btn-secondary">Learn more about this page</a>
         </p>
