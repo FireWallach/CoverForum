@@ -50,8 +50,8 @@
                   <div class="collapse" id="collapseExample">
                       <div class="card card-body">
                           <form action = "<%= '/b/'.concat(boards[i].name) %>" method = "POST">
-                            <input name="name" class="form-control" placeholder="Name" autofocus>
-                            <input name="description" class="form-control" placeholder="Description" >
+                            <input type="hidden" name="name" value="<%= boards[i].name%>" />
+                            <input name="description" class="form-control" placeholder="Description" autofocus>
                             <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
                           </form>
                       </div>
