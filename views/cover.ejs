@@ -35,7 +35,7 @@
         <p class="lead">Dang this is a pretty good page right here</p>
         <% for(var i=0; i<boards.length; i++) { %>
           <div class="card">
-            <h5 class="card-header"><%= boards[i].name %></h5>
+            <h5 class="card-header"><a href = "<%= '/b/'.concat(boards[i].name) %>"><%= boards[i].name %></a></h5>
             <div class="card-body">
               <h5 class="card-title"><%= boards[i].description %></h5>
               

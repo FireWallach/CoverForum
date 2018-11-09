@@ -20,6 +20,7 @@ mongoose.connect(configDB.url, {useNewUrlParser:true});
 require('./config/passport')(passport); 
 
 app.use('/', express.static(path.join(__dirname, 'public')));
+app.use('/b/',express.static(path.join(__dirname, 'public')))
 
 
 app.use(morgan('dev'));
