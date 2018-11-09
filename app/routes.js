@@ -99,6 +99,8 @@ module.exports = function (app, passport) {
             }
         })
     });
+
+    //Update the object if new data is provided, delete it if not.
     app.post('/b/:board', isLoggedIn, function (req, res) {
         //Use the path variable to determine the board (because the ID is gross) and use the body new attributes
         if (req.body.name == undefined) {
@@ -188,6 +190,30 @@ module.exports = function (app, passport) {
                 res.redirect('/b/'.concat(req.params.boardName))
             }
         })
+    });
+    app.post('/b/:boardName/:threadName', isLoggedIn, function (req, res) {
+        //Use the path variable to determine the thread (because the ID is gross) and use the body new attributes
+        if (req.body.name == undefined) {
+            Thread.deleteOne({ name: req.params.threadName }, function (err, thread) {
+                res.redirect('/b/'.concat(req.params.boardName));
+            });
+        } else if (req.body.name) {
+            var upThread = {
+                name: req.body.name,
+                initialPost: req.body.initialPost,
+                parentBoard: req.params.boardName
+            }
+
+            Thread.findOneAndUpdate({ name: req.body.name }, upThread, function (err, thread) {
+                if (err) {
+                    res.render('login.ejs', { message: 'Error updating, Sorry!' })
+                }
+                else {
+                    res.redirect('/b/'.concat(req.params.boardName));
+                }
+            });
+        }
+
     });
 
     // =====================================
