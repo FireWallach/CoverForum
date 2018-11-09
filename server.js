@@ -24,11 +24,15 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 
 app.use(morgan('dev'));
 app.use(cookieParser());
-app.use(bodyParser()); 
+app.use(bodyParser.urlencoded({ extended: true })); 
 app.set('view engine', 'ejs'); 
 app.use(favicon(path.join(__dirname,'public','images','scroll.ico')));
 
-app.use(session({ secret: 'bobs' })); 
+app.use(session({ 
+    secret: 'bobs',
+    resave:true,
+    saveUninitialized:true
+})); 
 app.use(passport.initialize());
 app.use(passport.session()); 
 app.use(flash()); 

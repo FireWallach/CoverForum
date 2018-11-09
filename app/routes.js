@@ -99,11 +99,28 @@ module.exports = function(app, passport) {
         })
     });
     app.post('/b/:board', isLoggedIn, function(req, res){
-        Board.deleteOne({name : req.params.board}, function(err, board){
-            res.redirect('/cover');
-        });
+        //Use the path variable to determine the board (because the ID is gross) and use the body new attributes
+        if(req.body.name == undefined){
+            Board.deleteOne({name : req.params.board}, function(err, board){
+                res.redirect('/cover');
+            });
+        } else if(req.body.name){
+            var upBoard = {
+                name : req.body.name,
+                description : req.body.description
+            }
+            
+            Board.findOneAndUpdate({name : req.params.board}, upBoard, function(err, board){
+                if(err){
+                    res.render('login.ejs', {message: 'Error updating, Sorry!'})
+                }
+                else {
+                    res.redirect('/cover');
+                }
+            });
+        }
+        
     });
-
 
     // =====================================
     // LOGOUT ==============================
@@ -112,7 +129,6 @@ module.exports = function(app, passport) {
         req.logout();
         res.redirect('/');
     });
-        
 };
 
 // route middleware to make sure a user is logged in
