@@ -21,7 +21,7 @@
   <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="masthead mb-auto">
       <div class="inner">
-        <h3 class="masthead-brand"><a href=".">Cover</a></h3>
+        <h3 class="masthead-brand"><a href="."><img class="mb-4" src="/images/placeholder-logo.png" alt="" width="72" height="72"></a></h3>
         <nav class="nav nav-masthead justify-content-center">
           <a class="nav-link active" href="#">Home</a>
           <a class="nav-link" href="#">Features</a>
@@ -31,8 +31,8 @@
     </header>
 
     <main role="main" class="inner cover">
-      <h1 class="cover-heading">It's a page</h1>
-      <p class="lead">Dang this is a pretty good page right here</p>
+      <h1 class="cover-heading">Boards</h1>
+      <p class="lead">A list of currently available boards</p>
       <% for(var i=0; i<boards.length; i++) { %>
       <div class="card">
         <h5 class="card-header"><a href="<%= '/b/'.concat(boards[i].name) %>">
@@ -66,7 +66,7 @@
       <% } %>
       <p class="lead">
         <a href="#" class="btn btn-lg btn-secondary">Learn more about this page</a>
-        <a href="/b" class="btn btn-lg btn-secondary">This is my new board button for now lmao b</a>
+        <a href="/b" class="btn btn-lg btn-secondary">Create new board</a>
       </p>
     </main>
 
