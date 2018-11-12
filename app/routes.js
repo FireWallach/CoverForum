@@ -174,7 +174,7 @@ module.exports = function (app, passport) {
             }
             if (thread) {
                 res.render('newThread.ejs', {
-                    thread: req.thread,
+                    boardName: req.params.boardName,
                     message: 'Thread Name Taken.'
                 })
             }
