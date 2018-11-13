@@ -45,12 +45,12 @@
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                     <p>
-                        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button"
+                        <a class="btn btn-primary" data-toggle="collapse" href="#<%= 'collapseExample'.concat(i) %>" role="button"
                             aria-expanded="false" aria-controls="collapseExample">
                             Edit
                         </a>
                     </p>
-                    <div class="collapse" id="collapseExample">
+                    <div class="collapse" id="<%= 'collapseExample'.concat(i) %>">
                         <div class="card card-body">
                             <form action="<%= '/b/'.concat(boardName).concat('/').concat(threads[i].name) %>" method="POST">
                                 <input type="hidden" name="name" value="<%= threads[i].name%>" />
