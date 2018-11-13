@@ -35,8 +35,8 @@
       <p class="lead">A list of currently available boards</p>
       <% for(var i=0; i<boards.length; i++) { %>
       <div class="card">
-        <h5 class="card-header"><a href="<%= '/b/'.concat(boards[i].name) %>">
-            <%= boards[i].name %></a></h5>
+        <a href="<%= '/b/'.concat(boards[i].name) %>"><h5 class="card-header">
+            <%= boards[i].name %></h5></a>
         <div class="card-body">
           <h5 class="card-title">
             <%= boards[i].description %>
