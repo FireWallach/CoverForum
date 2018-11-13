@@ -18,7 +18,7 @@
 
 <body class="text-center">
 
-  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <div class="container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="masthead mb-auto">
       <div class="inner">
         <h3 class="masthead-brand"><a href="."><img class="mb-4" src="/images/placeholder-logo.png" alt="" width="72" height="72"></a></h3>
@@ -38,27 +38,25 @@
         <a href="<%= '/b/'.concat(boards[i].name) %>"><h5 class="card-header">
             <%= boards[i].name %></h5></a>
         <div class="card-body">
-          <h5 class="card-title">
+          <h5 class="card-title float-left">
             <%= boards[i].description %>
           </h5>
 
-          <form action="<%= '/b/'.concat(boards[i].name) %>" method="POST" class="form-signin">
+          <form action="<%= '/b/'.concat(boards[i].name) %>" method="POST" class="form-signin float-right">
             <button type="submit" class="btn btn-danger">Delete</button>
           </form>
-          <p>
-            <a class="btn btn-primary" data-toggle="collapse" href="#<%= 'collapseExample'.concat(i) %>" role="button" aria-expanded="false"
-              aria-controls="collapseExample">
-              Edit
-            </a>
-          </p>
-          <div class="collapse" id="<%= 'collapseExample'.concat(i) %>">
-            <div class="card card-body">
-              <form action="<%= '/b/'.concat(boards[i].name) %>" method="POST">
-                <input type="hidden" name="name" value="<%= boards[i].name%>" />
-                <input name="description" class="form-control" placeholder="Description" autofocus>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
-              </form>
-            </div>
+          <a class="btn btn-primary float-right" data-toggle="collapse" href="#<%= 'collapseExample'.concat(i) %>" role="button" aria-expanded="false"
+            aria-controls="collapseExample">
+            Edit
+          </a>
+        </div>
+        <div class="collapse" id="<%= 'collapseExample'.concat(i) %>">
+          <div class="card card-body">
+            <form action="<%= '/b/'.concat(boards[i].name) %>" method="POST">
+              <input type="hidden" name="name" value="<%= boards[i].name%>" />
+              <input name="description" class="form-control" placeholder="Description" autofocus>
+              <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+            </form>
           </div>
         </div>
       </div>

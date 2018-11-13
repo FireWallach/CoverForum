@@ -14,7 +14,7 @@
 </head>
 
 <body class="text-center">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <div class="container d-flex w-100 h-100 p-3 mx-auto flex-column">
         <header class="masthead mb-auto">
             <div class="inner">
                 <h3 class="masthead-brand"><a href="/"><img class="mb-4" src="/images/placeholder-logo.png" alt="" width="72" height="72"></a></h3>
@@ -33,31 +33,31 @@
                 <%=boardDescription%>
             </p>
             <% for(var i=0; i<threads.length; i++) { %>
-            <div class="card" style="width: 18rem;">
+            <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">
                         <%= threads[i].name%>
                     </h5>
-                    <p class="card-text">
+                    <p class="card-text float-left">
                         <%= threads[i].initialPost%>
                     </p>
-                    <form action="<%= '/b/'.concat(boardName).concat('/').concat(threads[i].name) %>" method="POST" class="form-signin">
+                    <form action="<%= '/b/'.concat(boardName).concat('/').concat(threads[i].name) %>" method="POST" class="form-signin float-right">
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                     <p>
-                        <a class="btn btn-primary" data-toggle="collapse" href="#<%= 'collapseExample'.concat(i) %>" role="button"
+                        <a class="btn btn-primary float-right" data-toggle="collapse" href="#<%= 'collapseExample'.concat(i) %>" role="button"
                             aria-expanded="false" aria-controls="collapseExample">
                             Edit
                         </a>
                     </p>
-                    <div class="collapse" id="<%= 'collapseExample'.concat(i) %>">
-                        <div class="card card-body">
-                            <form action="<%= '/b/'.concat(boardName).concat('/').concat(threads[i].name) %>" method="POST">
-                                <input type="hidden" name="name" value="<%= threads[i].name%>" />
-                                <input name="initialPost" class="form-control" placeholder="Change Post?" autofocus>
-                                <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
-                            </form>
-                        </div>
+                </div>
+                <div class="collapse" id="<%= 'collapseExample'.concat(i) %>">
+                    <div class="card card-body">
+                        <form action="<%= '/b/'.concat(boardName).concat('/').concat(threads[i].name) %>" method="POST">
+                            <input type="hidden" name="name" value="<%= threads[i].name%>" />
+                            <input name="initialPost" class="form-control" placeholder="Change Post?" autofocus>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+                        </form>
                     </div>
                 </div>
             </div>
