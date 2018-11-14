@@ -24,8 +24,8 @@
         <h3 class="masthead-brand"><a href="/cover"><img class="mb-4" src="/images/placeholder-logo.png" alt="" width="72" height="72"></a></h3>
         <nav class="nav nav-masthead justify-content-center">
           <a class="nav-link active" href="/cover">Home</a>
-          <a class="nav-link" href="#">Features</a>
-          <a class="nav-link" href="#">Contact</a>
+          <p class="text-primary nav-link">Welcome,
+            <%=user.local.email %>!</p>
         </nav>
       </div>
     </header>
@@ -69,7 +69,7 @@
 
     <footer class="mastfoot mt-auto">
       <div class="inner">
-        <p>Welcome,
+        <p class="text-primary">Welcome,
           <%=user.local.email %>!</p>
       </div>
     </footer>
