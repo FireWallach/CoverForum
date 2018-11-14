@@ -145,7 +145,8 @@ module.exports = function (app, passport) {
                         res.render('board.ejs', {
                             boardName: board.name,
                             boardDescription: board.description,
-                            threads : threads
+                            threads : threads,
+                            user: req.user
                         })
                     }
                 })
