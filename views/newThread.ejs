@@ -1,35 +1,39 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>Forum Login Page</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <!-- Bootstrap core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <title>Forum Login Page</title>
 
-    <!-- Custom styles for this template -->
-    <link href="/css/signin.css" rel="stylesheet">
-  </head>
+  <!-- Bootstrap core CSS -->
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
 
-  <body class="text-center">
-    <form action="<%= '/b/'.concat(boardName).concat('/newthread')%>" method="POST" class="form-signin">
-      <h1 class="h3 mb-3 font-weight-normal">New Thread</h1>
-      <label for="inputName" class="sr-only">Thread Name:</label>
-      <input name="name" id="inputName" class="form-control" placeholder="Thread Name" required autofocus>
-      <label for="inputPassword" class="sr-only">Initial Post</label>
-      <input name="initialPost" id="inputPost" class="form-control" placeholder="Initial Post" required>
-      <div class="checkbox mb-3">
-      </div>
-      <% if (message.length > 0) { %>
-        <div class="alert alert-danger"><%= message %></div>
-      <% } %>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
-      <p class="mt-5 mb-3 text-muted">Group 10</p>
-    </form>
+  <!-- Custom styles for this template -->
+  <link href="/css/signin.css" rel="stylesheet">
+</head>
 
-  </body>
+<body class="text-center">
+  <form action="<%= '/b/'.concat(boardName).concat('/newthread')%>" method="POST" class="form-signin">
+    <h1 class="h3 mb-3 font-weight-normal">New Thread</h1>
+    <label for="inputName" class="sr-only">Thread Name:</label>
+    <input name="name" id="inputName" class="form-control" placeholder="Thread Name" required autofocus>
+    <label for="inputPassword" class="sr-only">Initial Post</label>
+    <input name="initialPost" id="inputPost" class="form-control" placeholder="Initial Post" required>
+    <div class="checkbox mb-3">
+    </div>
+    <% if (message.length > 0) { %>
+    <div class="alert alert-danger">
+      <%= message %>
+    </div>
+    <% } %>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
+    <p class="mt-5 mb-3 text-muted">Group 10</p>
+  </form>
+
+</body>
+
 </html>

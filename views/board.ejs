@@ -40,12 +40,13 @@
             <div class="card m-2">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <%= threads[i].name%>
+                        <a href="<%= '/b/'.concat(boardName).concat('/').concat(threads[i].name)%>"><%= threads[i].name%></a>
                     </h5>
                     <p class="card-text float-left">
                         <%= threads[i].initialPost%>
                     </p>
-                    <form action="<%= '/b/'.concat(boardName).concat('/').concat(threads[i].name) %>" method="POST" class="form-signin float-right">
+                    <form action="<%= '/b/'.concat(boardName).concat('/').concat(threads[i].name).concat('/delete') %>" method="POST" class="form-signin float-right">
+                        <input type="hidden" name="delete" value="true">
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                     <p>
