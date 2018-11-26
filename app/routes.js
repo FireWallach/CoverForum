@@ -176,7 +176,7 @@ module.exports = function (app, passport) {
             boardName: req.thread,
             message: "'newthread' is a protected term"
           })
-          return;
+          return
         }
       }
 
@@ -185,16 +185,16 @@ module.exports = function (app, passport) {
           boardName: req.params.boardName,
           message: 'Thread Name Taken.'
         })
-        return;
+        return
       }
       if (thread == null) {
-        var regex = /^[a-z0-9 ]+$/i;
-        if (!regex.test(req.body.name)) { ///NOTE TO SELF, CHECK INPUT AGAINST THIS /^[a-z0-9]+$/i
+        var regex = /^[a-z\d\-_\s]+$/i
+        if (!regex.test(req.body.name)) { // /NOTE TO SELF, CHECK INPUT AGAINST THIS /^[a-z0-9]+$/i
           res.render('newThread.ejs', {
             boardName: req.params.boardName,
             message: 'No Special Characters in board name'
           })
-          return;
+          return
         }
         var newThread = new Thread()
         newThread.name = req.body.name
@@ -236,10 +236,10 @@ module.exports = function (app, passport) {
       if (err) {
         res.render('login.ejs', { message: 'Error deleting' })
       } else {
-        res.redirect('/b/'.concat(req.params.boardName));
+        res.redirect('/b/'.concat(req.params.boardName))
       }
     })
-  });
+  })
 
   app.get('/b/:boardName/:threadName', isLoggedIn, function (req, res) {
     Thread.findOne({ parentBoard: req.params.boardName, name: req.params.threadName }, function (err, thread) {
@@ -272,22 +272,34 @@ module.exports = function (app, passport) {
   })
 
   app.post('/b/:boardName/:threadName/new', isLoggedIn, function (req, res) {
-    var newReply = new Reply()
-    newReply.parentThread = req.params.threadName
-    newReply.poster = req.user.local.email
-    newReply.replyBody = req.body.replyBody
-    newReply.save(function (err) {
-      if (err)
-        throw err
-    })
+    // If there's abody do what you have
+    if (req.body.replyBody) {
+      var newReply = new Reply()
+      newReply.parentThread = req.params.threadName
+      newReply.poster = req.user.local.email
+      newReply.replyBody = req.body.replyBody
+      newReply.save(function (err) {
+        if (err)
+          throw err
+      })
+    } else if(req.body.image){
+      var newReply = new Reply()
+      newReply.parentThread = req.params.threadName
+      newReply.poster = req.user.local.email
+      newReply.image = req.body.image
+      newReply.save(function (err) {
+        if (err)
+          throw err
+      })
+    }
     res.redirect('/b/'.concat(req.params.boardName).concat('/').concat(req.params.threadName))
   })
 
-  app.post('/b/:boardName/:threadName/cdelete', isLoggedIn, function(req, res){
-    Reply.findOneAndDelete({replyBody: req.body.replyBody}, function(err, reply){
-      if(err){
-        throw err;
-      } else{
+  app.post('/b/:boardName/:threadName/cdelete', isLoggedIn, function (req, res) {
+    Reply.findOneAndDelete({ $or:[ {replyBody:req.body.replyBody}, {image:req.body.image} ]}, function (err, reply) {
+      if (err) {
+        throw err
+      } else {
         res.redirect('/b/'.concat(req.params.boardName).concat('/').concat(req.params.threadName))
       }
     })
@@ -303,7 +315,7 @@ module.exports = function (app, passport) {
 }
 
 // route middleware to make sure a user is logged in
-function isLoggedIn(req, res, next) {
+function isLoggedIn (req, res, next) {
 
   // if user is authenticated in the session, carry on 
   if (req.isAuthenticated())

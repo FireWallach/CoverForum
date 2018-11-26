@@ -90,3 +90,12 @@ body {
 .mastfoot {
   color: rgba(255, 255, 255, .5);
 }
+
+.text_edit {
+	height: 100px;
+	resize: none;
+}
+
+#view_text {
+	width: 500px;
+}
