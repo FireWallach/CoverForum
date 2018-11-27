@@ -100,8 +100,7 @@
                     <form action="<%= '/b/'.concat(boardName).concat('/').concat(threadName).concat('/new')%>"
                         method="POST">
                         <label for="inputName" class="sr-only">Thread Name:</label>
-                        <input name="replyBody" id="inputBody" class="form-control" placeholder="Text" required
-                            autofocus>
+                        <input name="replyBody" id="inputBody" class="form-control" placeholder="Text" required>
                         <button class="btn btn-lg btn-primary" type="submit">Submit</button>
                     </form>
                 </div>
@@ -119,7 +118,7 @@
                 <div class="card-body">
                     <h4>Image/GIF URL:</h4>
                     <form action="<%= '/b/'.concat(boardName).concat('/').concat(threadName).concat('/new')%>" method="POST">
-                        <input name="image" id="inputBody" class="form-control" placeholder="Text" required autofocus>
+                        <input name="image" id="inputBody" class="form-control" placeholder="Text" required>
                         <button class="btn btn-lg btn-primary" type="submit">Submit</button>
                     </form>
                 </div>
